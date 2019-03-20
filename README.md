@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/stoeffu/ConnectZuehlke.svg)](https://travis-ci.com/stoeffu/ConnectZuehlke)
+[![Build Status](https://travis-ci.org/stoeffu/ConnectZuehlke.svg)](https://travis-ci.org/stoeffu/ConnectZuehlke)
 
 # Fullstack Hackathon - Spring meets Angular
 
