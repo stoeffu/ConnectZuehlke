@@ -8,10 +8,11 @@ export class PersistencyService {
   constructor() { }
 
   setUsername(username: string) {
-    console.log("username set: " + username);
+    localStorage.setItem('username', username);
   }
 
   getUsername(): string {
-    return "mpe";
+    return localStorage.getItem('username');
   }
+
 }

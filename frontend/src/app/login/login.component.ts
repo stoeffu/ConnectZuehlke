@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PersistencyService} from "../persistency.service";
+import {PersistencyService} from '../persistency.service';
 
 @Component({
   selector: 'app-login',
