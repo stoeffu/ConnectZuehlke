@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface InsightEmployeeService {
 
-    List<Employee> getEmployees();
+    List<Employee> getEmployees(List<String> employeeCodes);
 
     byte[] getEmployeePicture(String code) throws IOException;
 

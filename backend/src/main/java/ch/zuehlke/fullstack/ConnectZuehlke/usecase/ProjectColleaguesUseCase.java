@@ -22,22 +22,27 @@ public class ProjectColleaguesUseCase {
         this.projectService = projectService;
     }
 
-    public List<Project> getProjectColleaguesFor(String code) {
-        List<Project> currentProjects = employeeService.getCurrentProjectsForEmployee(code);
+    public List<Project> getProjectColleaguesFor(String employeeCode) {
+        List<Project> currentProjects = employeeService.getCurrentProjectsForEmployee(employeeCode);
 
         return currentProjects.stream()
-                .map(project -> project.withEmployees(getProjectColleagues(code, project)))
+                .map(project -> project.withEmployees(getProjectColleagues(employeeCode, project)))
                 .collect(toList());
     }
 
-    public byte[] getEmployeePicture(String code) throws IOException {
-        return employeeService.getEmployeePicture(code);
+    public byte[] getEmployeePicture(String employeeCode) throws IOException {
+        return employeeService.getEmployeePicture(employeeCode);
     }
 
     private List<Employee> getProjectColleagues(String code, Project project) {
-        return projectService.getCurrentTeam(project.getCode()).stream()
+        List<Employee> colleagues = projectService.getCurrentTeam(project.getCode()).stream()
                 .filter(e -> !e.getCode().equalsIgnoreCase(code))
-                .map(employee -> employeeService.getEmployee(employee.getCode()))
                 .collect(toList());
+
+        List<String> employeeCodes = colleagues.stream()
+                .map(Employee::getCode)
+                .collect(toList());
+
+        return employeeService.getEmployees(employeeCodes);
     }
 }

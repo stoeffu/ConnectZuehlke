@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.toList;
@@ -31,12 +33,16 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees() {
+    public List<Employee> getEmployees(List<String> employeeCodes) {
+        Set<String> codes = new HashSet<>(employeeCodes);
+        String url = "/employees?name=" + String.join(",", codes);
+
         ResponseEntity<List<EmployeeResult>> response = this.insightRestTemplate
-                .exchange("/employees", GET, null, new ParameterizedTypeReference<List<EmployeeResult>>() {
+                .exchange(url, GET, null, new ParameterizedTypeReference<List<EmployeeResult>>() {
                 });
 
         return response.getBody().stream()
+                .filter(resp -> codes.contains(resp.getCode()))
                 .map(EmployeeMapper::toEmployee)
                 .collect(toList());
     }
