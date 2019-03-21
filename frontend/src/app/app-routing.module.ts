@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'employee/:code', component: EmployeeDetailComponent, canActivate: [AuthGuard]},
   {path: 'welcome', component: HackathonHeadlineComponent, canActivate: [AuthGuard]},
   {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
-  {path: 'project', component: ProjectColleaguesComponent, canActivate: [AuthGuard]},
+  {path: 'project-colleagues', component: ProjectColleaguesComponent, canActivate: [AuthGuard]},
 
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
