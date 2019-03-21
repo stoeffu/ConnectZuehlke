@@ -1,7 +1,9 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.EmployeeDto;
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.ProjectDto;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.EmployeeMapper;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.ProjectMapper;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.EmployeeResult;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.ProjectParticipation;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,12 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
 
     @Override
     public List<Employee> getEmployees() {
-        ResponseEntity<List<EmployeeDto>> response = this.insightRestTemplate
-                .exchange("/employees", GET, null, new ParameterizedTypeReference<List<EmployeeDto>>() {
+        ResponseEntity<List<EmployeeResult>> response = this.insightRestTemplate
+                .exchange("/employees", GET, null, new ParameterizedTypeReference<List<EmployeeResult>>() {
                 });
 
         return response.getBody().stream()
-                .map(EmployeeDto::toEmployee)
+                .map(EmployeeMapper::toEmployee)
                 .collect(toList());
     }
 
@@ -56,19 +58,19 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
 
     @Override
     public Employee getEmployee(String code) {
-        ResponseEntity<EmployeeDto> response = this.insightRestTemplate
-                .getForEntity(format("/employees/{0}", code), EmployeeDto.class);
+        ResponseEntity<EmployeeResult> response = this.insightRestTemplate
+                .getForEntity(format("/employees/{0}", code), EmployeeResult.class);
 
-        return response.getBody().toEmployee();
+        return EmployeeMapper.toEmployee(response.getBody());
     }
 
     @Override
     public List<Project> getCurrentProjectsForEmployee(String code) {
-        ResponseEntity<List<ProjectDto>> response = this.insightRestTemplate
-                .exchange(format("/employees/{0}/projects/current", code), GET, null, new ParameterizedTypeReference<List<ProjectDto>>() {
+        ResponseEntity<List<ProjectParticipation>> response = this.insightRestTemplate
+                .exchange(format("/employees/{0}/projects/current", code), GET, null, new ParameterizedTypeReference<List<ProjectParticipation>>() {
                 });
         return response.getBody().stream()
-                .map(ProjectDto::toProject)
+                .map(ProjectMapper::toProject)
                 .collect(toList());
     }
 }
