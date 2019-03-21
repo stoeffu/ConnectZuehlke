@@ -11,6 +11,7 @@ import {PersistencyService} from '../shared/persistency.service';
 export class PersonalDevelopmentComponent implements OnInit {
 
   userCode: string;
+  userName: string;
   personalDevelopment: PersonalDevelopment;
 
   constructor(private personalDevelopmentService: PersonalDevelopmentService,
@@ -18,7 +19,8 @@ export class PersonalDevelopmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userCode = this.persistencyService.getUsername();
+    this.userCode = this.persistencyService.getUserCode();
+    this.userName = this.persistencyService.getUserName();
 //    this.getPersonalDevelopment();
   }
 

@@ -9,8 +9,8 @@ export class LoginPage {
   }
 
   async assertLoginShownAndLogin() {
-    expect(this.getLoginTitleText()).toBe('Please login!');
-    await element(by.css('[data-id="username-input"]')).sendKeys('foo');
+    expect(this.getLoginTitleText()).toBe('Welcome!');
+    await element(by.css('[data-id="username-input"]')).sendKeys('kmu');
     return await element(by.css('[data-id="login-button"]')).click();
   }
 

@@ -1,24 +1,27 @@
 import {Injectable} from '@angular/core';
 
-const key = 'username';
+const KEY_USER_CODE = 'user_code';
+const KEY_USER_NAME = 'user_name';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PersistencyService {
 
-  constructor() {
+  setUser(code: string, name: string) {
+    localStorage.setItem(KEY_USER_CODE, code);
+    localStorage.setItem(KEY_USER_NAME, name);
   }
 
-  setUsername(username: string) {
-    localStorage.setItem(key, username);
+  getUserCode(): string {
+    return localStorage.getItem(KEY_USER_CODE);
   }
 
-  getUsername(): string {
-    return localStorage.getItem(key);
+  getUserName(): string {
+    return localStorage.getItem(KEY_USER_NAME);
   }
 
   deleteUsername() {
-    localStorage.removeItem(key);
+    localStorage.removeItem(KEY_USER_CODE);
+    localStorage.removeItem(KEY_USER_NAME);
   }
+
 }
