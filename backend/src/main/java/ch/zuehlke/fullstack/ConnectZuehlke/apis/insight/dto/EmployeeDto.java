@@ -14,6 +14,12 @@ public class EmployeeDto {
     private int id;
     @JsonProperty("Code")
     private String code;
+    @JsonProperty("MobilePhone")
+    private String mobile;
+    @JsonProperty("BusinessPhone")
+    private String business;
+    @JsonProperty("Mail")
+    private String mailAddress;
 
     public String getLastName() {
         return lastName;
@@ -27,12 +33,24 @@ public class EmployeeDto {
         return id;
     }
 
-    public Employee toEmployee() {
-        return new Employee(getFirstName(), getLastName(), getId(), getCode());
-    }
-
     private String getCode() {
         return code;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getBusiness() {
+        return business;
+    }
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public Employee toEmployee() {
+        return new Employee(getFirstName(), getLastName(), getMailAddress(), getMobile(), getBusiness(), getId(), getCode());
     }
 
 }

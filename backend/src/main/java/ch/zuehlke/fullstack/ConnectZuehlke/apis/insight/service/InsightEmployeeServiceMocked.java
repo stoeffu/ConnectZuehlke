@@ -1,12 +1,14 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -34,5 +36,10 @@ public class InsightEmployeeServiceMocked implements InsightEmployeeService {
     @Override
     public Employee getEmployee(String code) {
         return EMPLOYEES.stream().filter(employee -> employee.getCode().equals(code)).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Project> getCurrentProjectsForEmployee(String code) {
+        return Collections.emptyList();
     }
 }

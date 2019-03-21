@@ -20,7 +20,6 @@ import static org.springframework.http.HttpMethod.GET;
 public class InsightCustomerServiceRemote implements InsightCustomerService {
     private final RestTemplate insightRestTemplate;
 
-
     @Autowired
     public InsightCustomerServiceRemote(RestTemplate insightRestTemplate) {
         this.insightRestTemplate = insightRestTemplate;

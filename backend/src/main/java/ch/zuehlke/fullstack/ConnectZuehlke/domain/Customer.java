@@ -2,14 +2,14 @@ package ch.zuehlke.fullstack.ConnectZuehlke.domain;
 
 public class Customer {
 
-    private Integer id;
-    private String name;
-    private String street;
-    private String city;
-    private String country;
-    private Integer zip;
-    private Double longitude;
-    private Double latitude;
+    private final Integer id;
+    private final String name;
+    private final String street;
+    private final String city;
+    private final String country;
+    private final Integer zip;
+    private final Double longitude;
+    private final Double latitude;
 
     public Customer(Integer id, String name, String street, String city, String country, Integer zip, Double longitude, Double latitude) {
         this.id = id;
