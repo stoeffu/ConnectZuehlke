@@ -37,6 +37,7 @@ import {MapComponent} from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerComponent} from './customer-list/customer/customer.component';
+import {LoginComponent} from './login/login.component';
 import {ErrorRequestInterceptor} from './common/error-request-interceptor';
 import {ProjectColleaguesModule} from './project-colleagues/project-colleagues.module';
 
@@ -61,7 +62,8 @@ library.add(faAngular);
     EmployeeDetailComponent,
     MapComponent,
     CustomerListComponent,
-    CustomerComponent
+    CustomerComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

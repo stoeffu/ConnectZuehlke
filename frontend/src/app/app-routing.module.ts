@@ -7,8 +7,10 @@ import {EmployeeDetailComponent} from './employee-detail/employee-detail.compone
 import {MapComponent} from './map/map.component';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {ProjectColleaguesComponent} from './project-colleagues/project-colleagues.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: 'employees', component: EmployeeListComponent},
   {path: 'customers', component: CustomerListComponent},
   {path: 'employee/:code', component: EmployeeDetailComponent},
