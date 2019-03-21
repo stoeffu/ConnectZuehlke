@@ -7,6 +7,7 @@ import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -38,6 +39,7 @@ public class ProjectColleaguesUseCase {
         return projectService.getCurrentTeam(project.getCode()).stream()
                 .filter(e -> !e.getCode().equalsIgnoreCase(code))
                 .map(employee -> employeeService.getEmployee(employee.getCode()))
+                .sorted(Comparator.comparing(Employee::getLastName).thenComparing(Employee::getFirstName))
                 .collect(toList());
     }
 }
