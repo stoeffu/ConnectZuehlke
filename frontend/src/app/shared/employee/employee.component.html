@@ -1,7 +1,12 @@
-<p>
-  First Name: {{employee.firstName}}<br/>
-  Last Name: {{employee.lastName}}<br/>
-  Mail: {{employee.mail}}<br/>
-  Business Phone: {{employee.businessPhoneNumber}}<br/>
-  Mobile Phone: {{employee.mobilePhoneNumber}}<br/>
-</p>
+<mat-expansion-panel>
+  <mat-expansion-panel-header [collapsedHeight]="'70px'" [expandedHeight]="'70px'">
+    <img src="../../../assets/demo.jpg" width="70">
+    {{employee.firstName}} {{employee.lastName}}
+  </mat-expansion-panel-header>
+
+  <p>
+    E-Mail: <a href="mailto:{{employee.mail}}">{{employee.mail}}</a><br/>
+    Mobile Phone: <a href="tel:{{employee.mobilePhoneNumber}}">{{employee.mobilePhoneNumber}}</a><br/>
+    Business Phone: <a href="tel:{{employee.businessPhoneNumber}}">{{employee.businessPhoneNumber}}</a><br/>
+  </p>
+</mat-expansion-panel>

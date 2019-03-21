@@ -3,7 +3,8 @@ import {Colleague} from '../../domain/Colleague';
 
 @Component({
   selector: 'app-employee-2',
-  templateUrl: './employee.component.html'
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent {
 
