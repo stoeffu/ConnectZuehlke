@@ -40,21 +40,6 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     }
 
     @Override
-    public byte[] getEmployeePicture(int id) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<byte[]> response = this.insightRestTemplate
-                .exchange(format("/employees/{0}/picture?large=false", id), GET, entity, byte[].class, "1");
-        if (response.getStatusCode() == HttpStatus.OK) {
-            return response.getBody();
-        }
-        throw new IllegalStateException("Status code was not 200");
-    }
-
-    @Override
     public byte[] getEmployeePicture(String code) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
