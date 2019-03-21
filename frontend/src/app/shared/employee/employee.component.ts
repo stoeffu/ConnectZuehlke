@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Colleague} from '../../domain/Colleague';
 
 @Component({
-  selector: 'app-employee-2',
+  selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss']
 })

@@ -1,4 +1,8 @@
 <h3>Projekt {{project.projectName}}</h3>
 
-<app-employee-2 *ngFor="let employee of project.colleagues"
-                [employee]="employee"></app-employee-2>
+<p *ngIf="project.colleagues.length == 0">
+  Du hast keine Kollegen!
+</p>
+
+<app-employee *ngFor="let employee of project.colleagues"
+              [employee]="employee"></app-employee>
