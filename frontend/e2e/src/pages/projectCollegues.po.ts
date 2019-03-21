@@ -1,7 +1,8 @@
 import {browser, by, element, ElementFinder} from 'protractor';
 
-export class EmployeeListPo {
-  private rootSelector = by.css('[data-id="employee-list"]');
+
+export class ProjectColleguesPo {
+  private rootSelector = by.css('[data-id="projectCollegues-list"]');
   private root: ElementFinder;
 
   constructor() {
@@ -9,7 +10,7 @@ export class EmployeeListPo {
   }
 
   navigateTo() {
-    return browser.get(`${browser.baseUrl}/employees`) as Promise<any>;
+    return browser.get('${browser.baseUrl}/employees') as Promise<any>;
   }
 
   isDisplayed() {

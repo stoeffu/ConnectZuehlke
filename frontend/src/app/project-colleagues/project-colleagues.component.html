@@ -8,7 +8,7 @@
     Loading ...
   </p>
 
-  <mat-list *ngIf="projectColleagues">
+  <mat-list *ngIf="projectColleagues" data-id="projectCollegues-list">
 
     <app-projects *ngFor="let project of projectColleagues.projects"
                   [project]="project"></app-projects>

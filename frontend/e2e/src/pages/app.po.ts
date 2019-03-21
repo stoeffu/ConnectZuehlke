@@ -1,15 +1,16 @@
 import {browser, by, element} from 'protractor';
 import {ToolbarFragment} from '../fragments/toolbar.fragment';
 import {SidebarFragment} from '../fragments/sidebar.fragment';
-import {EmployeeListPo} from './employeeList.po';
+import {ProjectColleguesPo} from './projectCollegues.po';
 
 export class AppPage {
   private toolbarFragment = new ToolbarFragment();
   private sidebarFragment = new SidebarFragment();
-  private employeeListPage = new EmployeeListPo();
+  private projectColleguesPage = new ProjectColleguesPo();
 
-  navigateTo() {
-    return browser.get(browser.baseUrl) as Promise<any>;
+  async navigateTo() {
+    return await browser.get(browser.baseUrl) as Promise<any>;
+
   }
 
   getTitleText() {
@@ -24,7 +25,7 @@ export class AppPage {
     return this.sidebarFragment;
   }
 
-  employeeList() {
-    return this.employeeListPage;
+  projectColleguesList() {
+    return this.projectColleguesPage;
   }
 }

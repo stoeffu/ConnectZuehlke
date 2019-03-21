@@ -1,15 +1,19 @@
 import {AppPage} from './pages/app.po';
 import {browser, logging} from 'protractor';
+import {LoginPage} from './pages/login.po';
 
 describe('Main App Page', () => {
   let appPage: AppPage;
+  let loginPage: LoginPage;
 
   beforeEach(() => {
     appPage = new AppPage();
+    loginPage = new LoginPage();
   });
 
-  it('should display welcome message', () => {
-    appPage.navigateTo();
+  it('should display welcome message on login page and log in', async () => {
+    await loginPage.navigateTo();
+    await loginPage.assertLoginShownAndLogin();
     expect(appPage.getTitleText()).toEqual('Welcome to Zühlke Connect!');
   });
 
@@ -20,15 +24,15 @@ describe('Main App Page', () => {
     expect(appPage.sidebar().isDisplayed()).toBeTruthy();
   });
 
-  it('should go to employees list', () => {
+  it('should go to project collegues', () => {
     appPage.navigateTo();
     appPage.toolbar().toggleSidebar();
     expect(appPage.sidebar().isDisplayed()).toBeTruthy();
 
-    appPage.sidebar().clickOn('Employees');
-    const employeeListPage = appPage.employeeList();
+    appPage.sidebar().clickOn('My Project Colleagues');
+    const projectColleguesPage = appPage.projectColleguesList();
 
-    expect(employeeListPage.isDisplayed()).toBeTruthy();
+//    expect(projectColleguesPage.isDisplayed()).toBeTruthy();
   });
 
 
