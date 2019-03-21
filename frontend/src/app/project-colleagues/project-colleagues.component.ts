@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectColleagues} from '../domain/ProjectColleagues';
 import {ProjectColleaguesService} from '../project-colleagues.service';
+import {PersistencyService} from '../shared/persistency.service';
 
 @Component({
   selector: 'app-project-colleagues-list',
@@ -8,18 +9,21 @@ import {ProjectColleaguesService} from '../project-colleagues.service';
 })
 export class ProjectColleaguesComponent implements OnInit {
 
+  userCode: string;
   projectColleagues: ProjectColleagues;
 
-  constructor(private service: ProjectColleaguesService) {
+  constructor(private projectColleaguesService: ProjectColleaguesService,
+              private persistencyService: PersistencyService) {
   }
 
   ngOnInit() {
+    this.userCode = this.persistencyService.getUsername();
     this.getProjectColleagues();
   }
 
   private getProjectColleagues() {
-    this.service
-      .getProjectColleagues('dummy')
+    this.projectColleaguesService
+      .getProjectColleagues(this.userCode)
       .subscribe(projectColleagues => this.projectColleagues = projectColleagues);
   }
 
