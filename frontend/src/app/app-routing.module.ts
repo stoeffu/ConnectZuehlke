@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'employee/:code', component: EmployeeDetailComponent},
   {path: 'welcome', component: HackathonHeadlineComponent},
   {path: 'map', component: MapComponent},
-  {path: 'project', component: ProjectColleaguesComponent},
+  {path: 'project-colleagues', component: ProjectColleaguesComponent},
 
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
