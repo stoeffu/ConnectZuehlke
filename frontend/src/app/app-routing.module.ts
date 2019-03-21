@@ -8,15 +8,18 @@ import {MapComponent} from './map/map.component';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {ProjectColleaguesComponent} from './project-colleagues/project-colleagues.component';
 import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './shared/auth.guard';
+import {LogoutComponent} from './logout/logout.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'employees', component: EmployeeListComponent},
-  {path: 'customers', component: CustomerListComponent},
-  {path: 'employee/:code', component: EmployeeDetailComponent},
-  {path: 'welcome', component: HackathonHeadlineComponent},
-  {path: 'map', component: MapComponent},
-  {path: 'project', component: ProjectColleaguesComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: 'employees', component: EmployeeListComponent, canActivate: [AuthGuard]},
+  {path: 'customers', component: CustomerListComponent, canActivate: [AuthGuard]},
+  {path: 'employee/:code', component: EmployeeDetailComponent, canActivate: [AuthGuard]},
+  {path: 'welcome', component: HackathonHeadlineComponent, canActivate: [AuthGuard]},
+  {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
+  {path: 'project', component: ProjectColleaguesComponent, canActivate: [AuthGuard]},
 
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

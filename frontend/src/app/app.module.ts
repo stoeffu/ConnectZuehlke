@@ -40,6 +40,7 @@ import {CustomerComponent} from './customer-list/customer/customer.component';
 import {LoginComponent} from './login/login.component';
 import {ErrorRequestInterceptor} from './common/error-request-interceptor';
 import {ProjectColleaguesModule} from './project-colleagues/project-colleagues.module';
+import { LogoutComponent } from './logout/logout.component';
 
 
 // For more icons, please checkout https://fontawesome.com/icons?d=gallery
@@ -63,7 +64,8 @@ library.add(faAngular);
     MapComponent,
     CustomerListComponent,
     CustomerComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
