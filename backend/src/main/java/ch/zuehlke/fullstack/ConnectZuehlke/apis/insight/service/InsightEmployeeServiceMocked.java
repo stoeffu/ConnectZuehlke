@@ -1,6 +1,7 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.Group;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Profile;
@@ -40,6 +41,11 @@ public class InsightEmployeeServiceMocked implements InsightEmployeeService {
 
     @Override
     public List<Project> getCurrentProjectsForEmployee(String code) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<Group> getCurrentGroupsForEmployee(String code) {
         return Collections.emptyList();
     }
 }

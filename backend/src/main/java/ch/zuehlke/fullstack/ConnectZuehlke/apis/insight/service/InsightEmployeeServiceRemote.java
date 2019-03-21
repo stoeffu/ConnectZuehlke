@@ -1,8 +1,10 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.EmployeeDto;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.GroupDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.ProjectDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.Group;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -70,6 +72,17 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
         return response.getBody().stream()
                 .map(ProjectDto::toProject)
                 .distinct()
+                .collect(toList());
+    }
+
+    @Override
+    public List<Group> getCurrentGroupsForEmployee(String code) {
+        ResponseEntity<List<GroupDto>> response = this.insightRestTemplate
+                .exchange(format("/employees/{0}/groups", code), GET, null, new ParameterizedTypeReference<List<GroupDto>>() {
+                });
+
+        return response.getBody().stream()
+                .map(GroupDto::toGroup)
                 .collect(toList());
     }
 }
