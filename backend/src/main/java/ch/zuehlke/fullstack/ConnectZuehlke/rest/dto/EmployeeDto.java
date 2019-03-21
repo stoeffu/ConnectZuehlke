@@ -1,7 +1,9 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.rest.dto;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmployeeDto {
     private String firstName;
     private String lastName;
