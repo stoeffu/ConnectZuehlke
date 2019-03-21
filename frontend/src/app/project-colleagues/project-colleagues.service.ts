@@ -11,10 +11,6 @@ export class ProjectColleaguesService {
   }
 
   public getProjectColleagues(code: string): Observable<ProjectColleagues> {
-    return this.getActualProjectColleagues(code);
-  }
-
-  private getActualProjectColleagues(code: string) {
     return this.http
       .get<ProjectColleagues>(`/api/${code}/projectColleagues`)
       .pipe(catchError(this.handleError('getProjectColleagues', undefined)));

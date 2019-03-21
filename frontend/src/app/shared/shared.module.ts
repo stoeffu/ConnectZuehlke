@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {PersistencyService} from './persistency.service';
 import {MatExpansionModule} from '@angular/material';
 import {intersectionObserverPreset, LazyLoadImageModule} from 'ng-lazyload-image';
+import {EmployeeService} from './employee.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {intersectionObserverPreset, LazyLoadImageModule} from 'ng-lazyload-image
     EmployeeComponent
   ],
   providers: [
+    EmployeeService,
     PersistencyService
   ]
 })

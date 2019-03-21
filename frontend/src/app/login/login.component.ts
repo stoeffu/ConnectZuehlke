@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PersistencyService} from '../shared/persistency.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {EmployeeService} from '../shared/employee.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,14 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username: string;
+
+  userCode: string;
+  userName: string;
   returnUrl: string;
 
   constructor(
     private persistencyService: PersistencyService,
+    private employeeService: EmployeeService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
   }
@@ -24,13 +28,26 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.username) {
-      this.persistencyService.setUsername(this.username);
-      if (this.returnUrl) {
-        this.goTo(this.returnUrl);
-      } else {
-        this.goTo('/');
+    this.employeeService.getEmployee(this.userCode).subscribe(
+      employee => {
+        this.userName = employee.firstName + ' ' + employee.lastName;
+      },
+      () => {
+        console.log('error');
+      },
+      () => {
+        this.persistencyService.setUser(this.userCode, this.userName);
+        this.redirect();
       }
+    );
+
+  }
+
+  private redirect() {
+    if (this.returnUrl) {
+      this.goTo(this.returnUrl);
+    } else {
+      this.goTo('/');
     }
   }
 

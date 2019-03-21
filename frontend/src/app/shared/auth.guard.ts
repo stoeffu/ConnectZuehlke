@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 
 import {PersistencyService} from './persistency.service';
 
@@ -11,8 +11,8 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const username = this.persistencyService.getUsername();
-    if (username) {
+    const userCode = this.persistencyService.getUserCode();
+    if (userCode) {
       return true;
     }
 

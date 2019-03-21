@@ -8,6 +8,8 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ActivatedRoute} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {of} from 'rxjs';
+import {SharedModule} from '../shared/shared.module';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,7 +21,9 @@ describe('LoginComponent', () => {
         FormsModule,
         NoopAnimationsModule,
         MatInputModule,
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule,
+        SharedModule
       ],
       declarations: [
         LoginComponent

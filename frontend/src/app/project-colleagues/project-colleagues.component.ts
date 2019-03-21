@@ -10,6 +10,7 @@ import {PersistencyService} from '../shared/persistency.service';
 export class ProjectColleaguesComponent implements OnInit {
 
   userCode: string;
+  userName: string;
   projectColleagues: ProjectColleagues;
 
   constructor(private projectColleaguesService: ProjectColleaguesService,
@@ -17,7 +18,8 @@ export class ProjectColleaguesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userCode = this.persistencyService.getUsername();
+    this.userCode = this.persistencyService.getUserCode();
+    this.userName = this.persistencyService.getUserName();
     this.getProjectColleagues();
   }
 
