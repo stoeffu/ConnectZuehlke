@@ -34,6 +34,12 @@ public class InsightEmployeeServiceMocked implements InsightEmployeeService {
     }
 
     @Override
+    public byte[] getEmployeePicture(String code) throws IOException {
+        ClassPathResource classPathResource = new ClassPathResource("demo_picture.jpg");
+        return IOUtils.toByteArray(classPathResource.getInputStream());
+    }
+
+    @Override
     public Employee getEmployee(String code) {
         return EMPLOYEES.stream().filter(employee -> employee.getCode().equals(code)).findFirst().orElse(null);
     }

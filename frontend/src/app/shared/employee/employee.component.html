@@ -1,6 +1,8 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header [collapsedHeight]="'70px'" [expandedHeight]="'70px'">
-    <img src="../../../assets/demo.jpg" width="70">
+    <img matListAvatar [width]="70" [height]="70"
+         defaultImage="../../../assets/demo.jpg" lazyLoad="/api/{{employee.code}}/picture"
+         alt="{{employee.firstName}} {{employee.lastName}}">
     {{employee.firstName}} {{employee.lastName}}
   </mat-expansion-panel-header>
 
