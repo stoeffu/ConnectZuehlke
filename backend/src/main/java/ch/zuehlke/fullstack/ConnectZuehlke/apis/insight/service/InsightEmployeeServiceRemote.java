@@ -69,6 +69,7 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
                 });
         return response.getBody().stream()
                 .map(ProjectDto::toProject)
+                .distinct()
                 .collect(toList());
     }
 }
