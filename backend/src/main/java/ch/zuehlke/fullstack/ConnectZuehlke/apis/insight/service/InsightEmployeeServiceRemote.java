@@ -1,7 +1,9 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.EmployeeDto;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.ProjectDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
@@ -12,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpMethod.GET;
 
@@ -19,7 +22,6 @@ import static org.springframework.http.HttpMethod.GET;
 @Profile({"prod", "staging"})
 public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     private final RestTemplate insightRestTemplate;
-
 
     @Autowired
     public InsightEmployeeServiceRemote(RestTemplate insightRestTemplate) {
@@ -45,7 +47,7 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<byte[]> response = this.insightRestTemplate
-                .exchange("/employees/" + id + "/picture?large=false", GET, entity, byte[].class, "1");
+                .exchange(format("/employees/{0}/picture?large=false", id), GET, entity, byte[].class, "1");
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
         }
@@ -55,8 +57,18 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     @Override
     public Employee getEmployee(String code) {
         ResponseEntity<EmployeeDto> response = this.insightRestTemplate
-                .getForEntity("/employees/" + code, EmployeeDto.class);
+                .getForEntity(format("/employees/{0}", code), EmployeeDto.class);
 
         return response.getBody().toEmployee();
+    }
+
+    @Override
+    public List<Project> getCurrentProjectsForEmployee(String code) {
+        ResponseEntity<List<ProjectDto>> response = this.insightRestTemplate
+                .exchange(format("/employees/{0}/projects/current", code), GET, null, new ParameterizedTypeReference<List<ProjectDto>>() {
+                });
+        return response.getBody().stream()
+                .map(ProjectDto::toProject)
+                .collect(toList());
     }
 }

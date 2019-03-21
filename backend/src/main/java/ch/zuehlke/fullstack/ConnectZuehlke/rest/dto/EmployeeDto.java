@@ -1,6 +1,8 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.rest.dto;
 
-public class ColleagueDto {
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+
+public class EmployeeDto {
     private String firstName;
     private String lastName;
     private String mail;
@@ -56,4 +58,14 @@ public class ColleagueDto {
         this.code = code;
     }
 
+    public static EmployeeDto of(Employee employee) {
+        EmployeeDto dto = new EmployeeDto();
+        dto.setCode(employee.getCode());
+        dto.setFirstName(employee.getFirstName());
+        dto.setLastName(employee.getLastName());
+        dto.setMail(employee.getMailAddress());
+        dto.setBusinessPhoneNumber(employee.getBusinessPhoneNumber());
+        dto.setMobilePhoneNumber(employee.getMobilePhoneNumber());
+        return dto;
+    }
 }
