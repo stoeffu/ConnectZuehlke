@@ -5,6 +5,9 @@ import {FormsModule} from '@angular/forms';
 import {PersistencyService} from '../shared/persistency.service';
 import {MatInputModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ActivatedRoute} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
+import {of} from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -15,13 +18,20 @@ describe('LoginComponent', () => {
       imports: [
         FormsModule,
         NoopAnimationsModule,
-        MatInputModule
+        MatInputModule,
+        RouterTestingModule
       ],
       declarations: [
         LoginComponent
       ],
       providers: [
-        PersistencyService
+        PersistencyService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of({returnUrl: '/welcome'})
+          }
+        }
       ]
     })
       .compileComponents();
