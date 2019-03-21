@@ -36,6 +36,7 @@ import {MapComponent} from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerComponent} from './customer-list/customer/customer.component';
+import { LoginComponent } from './login/login.component';
 
 
 // For more icons, please checkout https://fontawesome.com/icons?d=gallery
@@ -58,7 +59,8 @@ library.add(faAngular);
     EmployeeDetailComponent,
     MapComponent,
     CustomerListComponent,
-    CustomerComponent
+    CustomerComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
