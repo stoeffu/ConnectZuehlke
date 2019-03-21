@@ -4,7 +4,7 @@ import {ProjectColleaguesService} from './project-colleagues.service';
 import {PersistencyService} from '../shared/persistency.service';
 
 @Component({
-  selector: 'app-project-colleagues-list',
+  selector: 'app-project-colleagues',
   templateUrl: './project-colleagues.component.html'
 })
 export class ProjectColleaguesComponent implements OnInit {
