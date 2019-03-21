@@ -7,8 +7,7 @@ import {EmployeeService} from '../employee.service';
 
 @Component({
   selector: 'app-employee-detail',
-  templateUrl: './employee-detail.component.html',
-  styleUrls: ['./employee-detail.component.scss']
+  templateUrl: './employee-detail.component.html'
 })
 export class EmployeeDetailComponent implements OnInit {
   employee$: Observable<Employee>;

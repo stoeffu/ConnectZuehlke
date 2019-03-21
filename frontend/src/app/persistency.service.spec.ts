@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { PersistencyService } from './persistency.service';
+import {PersistencyService} from './persistency.service';
 
 describe('PersistencyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

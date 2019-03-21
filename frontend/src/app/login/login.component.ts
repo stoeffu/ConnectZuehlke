@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersistencyService} from '../persistency.service';
 
 @Component({
@@ -9,7 +9,8 @@ import {PersistencyService} from '../persistency.service';
 export class LoginComponent implements OnInit {
   username: string;
 
-  constructor(private persistencyService: PersistencyService) { }
+  constructor(private persistencyService: PersistencyService) {
+  }
 
   ngOnInit() {
   }

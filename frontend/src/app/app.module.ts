@@ -37,8 +37,9 @@ import {MapComponent} from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerComponent} from './customer-list/customer/customer.component';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {ErrorRequestInterceptor} from './common/error-request-interceptor';
+import {ProjectColleaguesModule} from './project-colleagues/project-colleagues.module';
 
 
 // For more icons, please checkout https://fontawesome.com/icons?d=gallery
@@ -83,7 +84,8 @@ library.add(faAngular);
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBrgp24CvFV3M0PZGByVDVEG0qn56k8Y-g'})
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBrgp24CvFV3M0PZGByVDVEG0qn56k8Y-g'}),
+    ProjectColleaguesModule
   ],
   providers: [
     {

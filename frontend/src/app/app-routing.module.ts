@@ -6,6 +6,7 @@ import {HackathonHeadlineComponent} from './hackathon-headline/hackathon-headlin
 import {EmployeeDetailComponent} from './employee-detail/employee-detail.component';
 import {MapComponent} from './map/map.component';
 import {CustomerListComponent} from './customer-list/customer-list.component';
+import {ProjectColleaguesComponent} from './project-colleagues/project-colleagues.component';
 import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'employee/:code', component: EmployeeDetailComponent},
   {path: 'welcome', component: HackathonHeadlineComponent},
   {path: 'map', component: MapComponent},
+  {path: 'project', component: ProjectColleaguesComponent},
 
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
