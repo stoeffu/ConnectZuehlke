@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectColleagues} from '../domain/ProjectColleagues';
-import {ProjectColleaguesService} from '../project-colleagues.service';
+import {ProjectColleaguesService} from './project-colleagues.service';
 import {PersistencyService} from '../shared/persistency.service';
 
 @Component({

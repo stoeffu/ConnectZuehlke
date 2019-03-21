@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {ProjectColleagues} from './domain/ProjectColleagues';
+import {ProjectColleagues} from '../domain/ProjectColleagues';
 import {catchError} from 'rxjs/operators';
 
 @Injectable()
@@ -11,42 +11,13 @@ export class ProjectColleaguesService {
   }
 
   public getProjectColleagues(code: string): Observable<ProjectColleagues> {
-
-    return of(this.getMockProjectColleagues());
+    return this.getActualProjectColleagues(code);
   }
 
   private getActualProjectColleagues(code: string) {
     return this.http
-      .get<ProjectColleagues>(`/api/${code}/project-colleagues`)
+      .get<ProjectColleagues>(`/api/${code}/projectColleagues`)
       .pipe(catchError(this.handleError('getProjectColleagues', undefined)));
-  }
-
-  private getMockProjectColleagues() {
-    return {
-      projects: [
-        {
-          projectName: 'Das coole Projekt',
-          colleagues: [
-            {
-              code: 'code-1',
-              firstName: 'Hans',
-              lastName: 'Muster',
-              mail: 'hans@muster.ch',
-              mobilePhoneNumber: 'telefon-1',
-              businessPhoneNumber: 'telefon-2'
-            },
-            {
-              code: 'code-2',
-              firstName: 'Petra',
-              lastName: 'Muster',
-              mail: 'petra@muster.ch',
-              mobilePhoneNumber: undefined,
-              businessPhoneNumber: 'telefon-3'
-            }
-          ]
-        }
-      ]
-    };
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
