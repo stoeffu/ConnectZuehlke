@@ -1,0 +1,18 @@
+<div class="content">
+
+  <h2>My Team Colleagues</h2>
+
+  <p>Hello {{userName}}!</p>
+
+  <p *ngIf="!teamColleagues">
+    Loading ...
+  </p>
+
+  <mat-list *ngIf="teamColleagues" data-id="teamCollegues-list">
+
+    <app-employee *ngFor="let employee of teamColleagues.colleagues"
+                  [employee]="employee"></app-employee>
+
+  </mat-list>
+
+</div>

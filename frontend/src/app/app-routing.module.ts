@@ -7,12 +7,14 @@ import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './shared/auth.guard';
 import {LogoutComponent} from './logout/logout.component';
 import {PersonalDevelopmentComponent} from './personal-development/personal-development.component';
+import {TeamColleaguesComponent} from './team-colleagues/team-colleagues.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'welcome', component: HackathonHeadlineComponent, canActivate: [AuthGuard]},
   {path: 'project-colleagues', component: ProjectColleaguesComponent, canActivate: [AuthGuard]},
+  {path: 'team-colleagues', component: TeamColleaguesComponent, canActivate: [AuthGuard]},
   {path: 'personal-development', component: PersonalDevelopmentComponent, canActivate: [AuthGuard]},
 
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},

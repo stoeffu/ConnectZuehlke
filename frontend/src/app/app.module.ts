@@ -36,6 +36,7 @@ import {ErrorRequestInterceptor} from './common/error-request-interceptor';
 import {ProjectColleaguesModule} from './project-colleagues/project-colleagues.module';
 import {LogoutComponent} from './logout/logout.component';
 import {PersonalDevelopmentModule} from './personal-development/personal-development.module';
+import {TeamColleaguesModule} from './team-colleagues/team-colleagues.module';
 
 
 // For more icons, please checkout https://fontawesome.com/icons?d=gallery
@@ -77,6 +78,7 @@ library.add(faAngular);
     MatListModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBrgp24CvFV3M0PZGByVDVEG0qn56k8Y-g'}),
     ProjectColleaguesModule,
+    TeamColleaguesModule,
     PersonalDevelopmentModule
   ],
   providers: [
