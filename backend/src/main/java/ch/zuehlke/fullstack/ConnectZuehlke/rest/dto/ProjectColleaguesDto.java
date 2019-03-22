@@ -1,11 +1,13 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.rest.dto;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProjectColleaguesDto {
 
     private List<ProjectDto> projects;

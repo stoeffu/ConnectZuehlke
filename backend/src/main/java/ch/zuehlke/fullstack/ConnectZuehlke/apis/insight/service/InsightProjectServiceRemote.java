@@ -1,7 +1,7 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.EmployeeDto;
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.TeamMemberDto;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.EmployeeMapper;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.ProjectParticipation;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
@@ -26,12 +26,12 @@ public class InsightProjectServiceRemote implements InsightProjectService {
 
     @Override
     public List<Employee> getCurrentTeam(String projectCode) {
-        ResponseEntity<List<TeamMemberDto>> response = this.insightRestTemplate
-                .exchange(format("/projects/{0}/team/current", projectCode), GET, null, new ParameterizedTypeReference<List<TeamMemberDto>>() {
+        ResponseEntity<List<ProjectParticipation>> response = this.insightRestTemplate
+                .exchange(format("/projects/{0}/team/current", projectCode), GET, null, new ParameterizedTypeReference<List<ProjectParticipation>>() {
                 });
         return response.getBody().stream()
-                .map(TeamMemberDto::getEmployee)
-                .map(EmployeeDto::toEmployee)
+                .map(ProjectParticipation::getEmployee)
+                .map(EmployeeMapper::toEmployee)
                 .collect(toList());
     }
 }

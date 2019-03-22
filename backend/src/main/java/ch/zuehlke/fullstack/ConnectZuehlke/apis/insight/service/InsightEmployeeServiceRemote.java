@@ -1,9 +1,10 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.EmployeeDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.GroupDto;
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.ProjectDto;
-import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.EmployeeMapper;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.ProjectMapper;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.ProjectParticipation;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Group;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.toList;
@@ -31,13 +34,17 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees() {
-        ResponseEntity<List<EmployeeDto>> response = this.insightRestTemplate
-                .exchange("/employees", GET, null, new ParameterizedTypeReference<List<EmployeeDto>>() {
+    public List<ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee> getEmployees(List<String> employeeCodes) {
+        Set<String> codes = new HashSet<>(employeeCodes);
+        String url = "/employees?name=" + String.join(",", codes);
+
+        ResponseEntity<List<Employee>> response = this.insightRestTemplate
+                .exchange(url, GET, null, new ParameterizedTypeReference<List<Employee>>() {
                 });
 
         return response.getBody().stream()
-                .map(EmployeeDto::toEmployee)
+                .filter(resp -> codes.contains(resp.getCode()))
+                .map(EmployeeMapper::toEmployee)
                 .collect(toList());
     }
 
@@ -57,20 +64,20 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     }
 
     @Override
-    public Employee getEmployee(String code) {
-        ResponseEntity<EmployeeDto> response = this.insightRestTemplate
-                .getForEntity(format("/employees/{0}", code), EmployeeDto.class);
+    public ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee getEmployee(String code) {
+        ResponseEntity<Employee> response = this.insightRestTemplate
+                .getForEntity(format("/employees/{0}", code), Employee.class);
 
-        return response.getBody().toEmployee();
+        return EmployeeMapper.toEmployee(response.getBody());
     }
 
     @Override
     public List<Project> getCurrentProjectsForEmployee(String code) {
-        ResponseEntity<List<ProjectDto>> response = this.insightRestTemplate
-                .exchange(format("/employees/{0}/projects/current", code), GET, null, new ParameterizedTypeReference<List<ProjectDto>>() {
+        ResponseEntity<List<ProjectParticipation>> response = this.insightRestTemplate
+                .exchange(format("/employees/{0}/projects/current", code), GET, null, new ParameterizedTypeReference<List<ProjectParticipation>>() {
                 });
         return response.getBody().stream()
-                .map(ProjectDto::toProject)
+                .map(ProjectMapper::toProject)
                 .distinct()
                 .collect(toList());
     }

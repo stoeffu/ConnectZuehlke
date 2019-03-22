@@ -2,10 +2,10 @@ package ch.zuehlke.fullstack.ConnectZuehlke.domain;
 
 public class Group {
 
-    private String id;
-    private String name;
-    private String type;
-    private String typeText;
+    private final String id;
+    private final String name;
+    private final String type;
+    private final String typeText;
 
     public Group(String id, String name, String type, String typeText) {
         this.id = id;

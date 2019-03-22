@@ -24,7 +24,7 @@ public class InsightEmployeeServiceMocked implements InsightEmployeeService {
             new Employee("Kurt", "Peters", 3, "kpe")
     );
 
-    public List<Employee> getEmployees() {
+    public List<Employee> getEmployees(List<String> employeeCodes) {
         return EMPLOYEES;
     }
 

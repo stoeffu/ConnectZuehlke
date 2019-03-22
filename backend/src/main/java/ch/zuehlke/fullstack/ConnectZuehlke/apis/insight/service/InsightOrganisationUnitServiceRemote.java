@@ -1,7 +1,7 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.EmployeeDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.ParticipantDto;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.EmployeeMapper;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -37,7 +37,7 @@ public class InsightOrganisationUnitServiceRemote implements InsightOrganisation
         return response.getBody().stream()
                 .filter(participant -> participant.getRoleText().equals(MEMBER))
                 .map(ParticipantDto::getEmployee)
-                .map(EmployeeDto::toEmployee)
+                .map(EmployeeMapper::toEmployee)
                 .collect(toList());
     }
 }
