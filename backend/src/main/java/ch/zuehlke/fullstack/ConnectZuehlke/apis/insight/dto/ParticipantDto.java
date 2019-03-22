@@ -1,11 +1,12 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto;
 
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.EmployeeResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ParticipantDto {
 
     @JsonProperty("Employee")
-    private EmployeeDto employee;
+    private EmployeeResult employee;
 
     @JsonProperty("Role")
     private String role;
@@ -13,7 +14,7 @@ public class ParticipantDto {
     @JsonProperty("RoleText")
     private String roleText;
 
-    public EmployeeDto getEmployee() {
+    public EmployeeResult getEmployee() {
         return employee;
     }
 

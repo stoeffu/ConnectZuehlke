@@ -2,7 +2,7 @@ package ch.zuehlke.fullstack.ConnectZuehlke.rest;
 
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
-import ch.zuehlke.fullstack.ConnectZuehlke.usecase.ProjectColleaguesUseCase;
+import ch.zuehlke.fullstack.ConnectZuehlke.usecase.ColleaguesUseCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("default")
-@WebMvcTest(value = ProjectColleaguesRestController.class)
+@WebMvcTest(value = ColleaguesRestController.class)
 public class ProjectColleaguesRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ProjectColleaguesUseCase useCase;
+    private ColleaguesUseCase useCase;
 
     @Test
     public void emptyResponse() throws Exception {

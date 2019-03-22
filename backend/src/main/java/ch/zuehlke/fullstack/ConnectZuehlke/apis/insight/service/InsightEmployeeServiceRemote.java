@@ -1,11 +1,10 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.GroupDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.EmployeeMapper;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.ProjectMapper;
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.GroupDto;
-import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.EmployeeResult;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.Employee;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.ProjectParticipation;
-import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Group;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +34,12 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees(List<String> employeeCodes) {
+    public List<ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee> getEmployees(List<String> employeeCodes) {
         Set<String> codes = new HashSet<>(employeeCodes);
         String url = "/employees?name=" + String.join(",", codes);
 
-        ResponseEntity<List<EmployeeResult>> response = this.insightRestTemplate
-                .exchange(url, GET, null, new ParameterizedTypeReference<List<EmployeeResult>>() {
+        ResponseEntity<List<Employee>> response = this.insightRestTemplate
+                .exchange(url, GET, null, new ParameterizedTypeReference<List<Employee>>() {
                 });
 
         return response.getBody().stream()
@@ -65,9 +64,9 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
     }
 
     @Override
-    public Employee getEmployee(String code) {
-        ResponseEntity<EmployeeResult> response = this.insightRestTemplate
-                .getForEntity(format("/employees/{0}", code), EmployeeResult.class);
+    public ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee getEmployee(String code) {
+        ResponseEntity<Employee> response = this.insightRestTemplate
+                .getForEntity(format("/employees/{0}", code), Employee.class);
 
         return EmployeeMapper.toEmployee(response.getBody());
     }
