@@ -14,7 +14,7 @@ export class PersonalDevelopmentService {
 
   public getDevelopmentProposal(code: string): Observable<DevelopmentProposal[]> {
     return this.http
-      .get<DevelopmentProposal>('/api/personalDevelopment/$(code)')
+      .get<DevelopmentProposal>(`/api/personalDevelopment/${code}`)
       .pipe(catchError(this.handleError('getDevelopmentProposal', undefined)));
   }
 
