@@ -22,14 +22,14 @@ public class ColleaguesRestController {
         this.colleaguesUseCase = colleaguesUseCase;
     }
 
-    @GetMapping("/{employee-code}/projects")
-    public ProjectColleaguesDto getProjectColleagues(@PathVariable("employee-code") String employeeCode) {
+    @GetMapping("/{employeeCode}/projects")
+    public ProjectColleaguesDto getProjectColleagues(@PathVariable String employeeCode) {
         List<Project> projects = colleaguesUseCase.getProjectColleaguesFor(employeeCode);
         return ProjectColleaguesDto.of(projects);
     }
 
-    @GetMapping("/{employee-code}/team")
-    public TeamColleaguesDto getTeamColleagues(@PathVariable("employee-code") String employeeCode) {
+    @GetMapping("/{employeeCode}/team")
+    public TeamColleaguesDto getTeamColleagues(@PathVariable String employeeCode) {
         List<Employee> teamColleagues = colleaguesUseCase.getTeamColleaguesFor(employeeCode);
         return TeamColleaguesDto.of(teamColleagues);
     }
