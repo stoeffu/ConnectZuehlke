@@ -1,6 +1,10 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.rest.dto;
 
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.DevelopmentProposal;
+
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class DevelopmentProposalDto {
     private String name;
@@ -38,5 +42,14 @@ public class DevelopmentProposalDto {
 
     public void setInterestedColleagues(List<EmployeeDto> interestedColleagues) {
         this.interestedColleagues = interestedColleagues;
+    }
+
+    public static DevelopmentProposalDto of(DevelopmentProposal proposal) {
+        DevelopmentProposalDto dto = new DevelopmentProposalDto();
+        dto.setExperts(proposal.getExperts().stream().map(EmployeeDto::of).collect(toList()));
+        dto.setInterestedColleagues(proposal.getColleagues().stream().map(EmployeeDto::of).collect(toList()));
+        dto.setName(proposal.getName());
+        dto.setSource(proposal.getSource());
+        return dto;
     }
 }
