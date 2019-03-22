@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Colleague} from '../../domain/Colleague';
+import {Employee} from '../../domain/Employee';
 
 @Component({
   selector: 'app-employee',
@@ -8,6 +8,6 @@ import {Colleague} from '../../domain/Colleague';
 })
 export class EmployeeComponent {
 
-  @Input() employee: Colleague;
+  @Input() employee: Employee;
 
 }

@@ -1,8 +1,8 @@
-import {Colleague} from './Colleague';
+import {Employee} from './Employee';
 
 export interface Project {
 
   projectName: string;
-  colleagues: Colleague[];
+  colleagues: Employee[];
 
 }
