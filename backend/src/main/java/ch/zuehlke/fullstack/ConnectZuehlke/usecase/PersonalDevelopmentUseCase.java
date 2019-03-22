@@ -1,27 +1,57 @@
 package ch.zuehlke.fullstack.ConnectZuehlke.usecase;
 
-import ch.zuehlke.fullstack.ConnectZuehlke.domain.DevelopmentProposal;
-import ch.zuehlke.fullstack.ConnectZuehlke.domain.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service.InsightAssetService;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service.InsightEmployeeService;
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class PersonalDevelopmentUseCase {
-    public List<DevelopmentProposal> getProposalsFor(String employeeCode) {
-        return getMockData();
+
+    private final InsightEmployeeService employeeService;
+    private final InsightAssetService assetService;
+
+    public PersonalDevelopmentUseCase(InsightEmployeeService employeeService, InsightAssetService assetService) {
+        this.employeeService = employeeService;
+        this.assetService = assetService;
     }
 
-    private List<DevelopmentProposal> getMockData() {
-        Employee e1 = new Employee("Hugo", "Boss", 100);
-        Employee e2 = new Employee("Maria", "Meier", 100);
-        Employee e3 = new Employee("Franz", "Müller", 100);
-        Employee e4 = new Employee("Helena", "Kummer", 100);
-        return asList(
-                new DevelopmentProposal("Interests", "Angular", asList(e1, e2), asList(e3, e4)),
-                new DevelopmentProposal("Development Goals", "Spring", asList(e2, e4), asList(e1, e3))
-        );
+    public List<DevelopmentProposal> getProposalsFor(String employeeCode) {
+        List<DevelopmentProposal> proposals = new ArrayList<>();
+
+        String ownLocation = employeeService.getEmployee(employeeCode).getLocation();
+
+        List<Skill> interests = employeeService.getInterestsForEmployee(employeeCode);
+        addDevelopmentProposal(proposals, interests, ownLocation);
+
+        List<Skill> skillGoals = employeeService.getSkillGoalsForEmployee(employeeCode);
+        addDevelopmentProposal(proposals, skillGoals, ownLocation);
+
+        return proposals;
+    }
+
+    private void addDevelopmentProposal(List<DevelopmentProposal> proposals, List<Skill> skills, String ownLocation) {
+        for (Skill skill : skills) {
+            List<SkilledEmployee> employees = assetService.getEmployeesForSkill(skill);
+
+            List<Employee> experts = employees.stream()
+                    .filter(skilledEmployee -> skilledEmployee.getSkillLevel().equals(SkillLevel.EXPERT))
+                    .map(SkilledEmployee::getEmployee)
+                    .filter(employee -> Objects.equals(employee.getLocation(), ownLocation))
+                    .collect(toList());
+            List<Employee> interested = employees.stream()
+                    .filter(skilledEmployee -> skilledEmployee.getSkillLevel().equals(SkillLevel.INTERESTED))
+                    .map(SkilledEmployee::getEmployee)
+                    .filter(employee -> Objects.equals(employee.getLocation(), ownLocation))
+                    .collect(toList());
+
+            proposals.add(new DevelopmentProposal("Interests", experts, interested, skill));
+        }
     }
 }

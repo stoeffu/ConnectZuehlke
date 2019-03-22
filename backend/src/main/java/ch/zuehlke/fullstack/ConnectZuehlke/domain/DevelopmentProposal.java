@@ -4,23 +4,23 @@ import java.util.List;
 
 public class DevelopmentProposal {
     private final String source;
-    private final String name;
     private final List<Employee> experts;
     private final List<Employee> colleagues;
+    private final Skill skill;
 
-    public DevelopmentProposal(String source, String name, List<Employee> experts, List<Employee> colleagues) {
+    public DevelopmentProposal(String source, List<Employee> experts, List<Employee> colleagues, Skill skill) {
         this.source = source;
-        this.name = name;
         this.experts = experts;
         this.colleagues = colleagues;
+        this.skill = skill;
+    }
+
+    public Skill getSkill() {
+        return skill;
     }
 
     public String getSource() {
         return source;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public List<Employee> getExperts() {

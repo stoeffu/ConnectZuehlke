@@ -11,6 +11,7 @@ public class EmployeeDto {
     private String mobilePhoneNumber;
     private String businessPhoneNumber;
     private String code;
+    private String location;
 
     public String getFirstName() {
         return firstName;
@@ -60,6 +61,14 @@ public class EmployeeDto {
         this.code = code;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public static EmployeeDto of(Employee employee) {
         EmployeeDto dto = new EmployeeDto();
         dto.setCode(employee.getCode());
@@ -68,6 +77,7 @@ public class EmployeeDto {
         dto.setMail(employee.getMailAddress());
         dto.setBusinessPhoneNumber(employee.getBusinessPhoneNumber());
         dto.setMobilePhoneNumber(employee.getMobilePhoneNumber());
+        dto.setLocation(employee.getLocation());
         return dto;
     }
 }

@@ -48,7 +48,7 @@ public class DevelopmentProposalDto {
         DevelopmentProposalDto dto = new DevelopmentProposalDto();
         dto.setExperts(proposal.getExperts().stream().map(EmployeeDto::of).collect(toList()));
         dto.setInterestedColleagues(proposal.getColleagues().stream().map(EmployeeDto::of).collect(toList()));
-        dto.setName(proposal.getName());
+        dto.setName(proposal.getSkill().getName());
         dto.setSource(proposal.getSource());
         return dto;
     }
