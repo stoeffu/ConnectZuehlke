@@ -4,4 +4,12 @@
   </button>
 
   <span>Connect Zühlke</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+
+  <span *ngIf="isLoggedIn()">
+    <img matListAvatar defaultImage="../../../assets/"
+         lazyLoad="/api/employee/{{getEmployeeCode()}}/picture">
+  </span>
 </mat-toolbar>
