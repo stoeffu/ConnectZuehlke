@@ -33,7 +33,7 @@ public class ProjectColleaguesRestControllerTest {
     public void emptyResponse() throws Exception {
         when(useCase.getProjectColleaguesFor("abc")).thenReturn(emptyList());
 
-        mockMvc.perform(get("/api/abc/projectColleagues"))
+        mockMvc.perform(get("/api/colleagues/abc/projects"))
                 .andExpect(content().json("{}"));
     }
 
@@ -50,7 +50,7 @@ public class ProjectColleaguesRestControllerTest {
                 ))
         ));
 
-        mockMvc.perform(get("/api/abc/projectColleagues"))
+        mockMvc.perform(get("/api/colleagues/abc/projects"))
                 .andExpect(content().json("{\n" +
                         "  \"projects\": [\n" +
                         "    {\n" +
