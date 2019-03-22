@@ -5,10 +5,12 @@ import {PersistencyService} from './persistency.service';
 import {MatExpansionModule} from '@angular/material';
 import {intersectionObserverPreset, LazyLoadImageModule} from 'ng-lazyload-image';
 import {EmployeeService} from './employee.service';
+import {EmployeeAccordionComponent} from './employee-accordion/employee-accordion.component';
 
 @NgModule({
   declarations: [
-    EmployeeComponent
+    EmployeeComponent,
+    EmployeeAccordionComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import {EmployeeService} from './employee.service';
     }),
   ],
   exports: [
-    EmployeeComponent
+    EmployeeComponent,
+    EmployeeAccordionComponent
   ],
   providers: [
     EmployeeService,
