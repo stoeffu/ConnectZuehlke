@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PersonalDevelopment} from '../domain/PersonalDevelopment';
+import {DevelopmentProposal} from '../domain/DevelopmentProposal';
 import {PersonalDevelopmentService} from './personal-development.service';
 import {PersistencyService} from '../shared/persistency.service';
 
@@ -12,7 +12,7 @@ export class PersonalDevelopmentComponent implements OnInit {
 
   userCode: string;
   userName: string;
-  personalDevelopment: PersonalDevelopment;
+  developmentProposals: DevelopmentProposal[];
 
   constructor(private personalDevelopmentService: PersonalDevelopmentService,
               private persistencyService: PersistencyService) {
@@ -21,13 +21,13 @@ export class PersonalDevelopmentComponent implements OnInit {
   ngOnInit() {
     this.userCode = this.persistencyService.getUserCode();
     this.userName = this.persistencyService.getUserName();
-//    this.getPersonalDevelopment();
+    this.getDevelopmentProposal();
   }
 
-  private getPersonalDevelopment() {
+  private getDevelopmentProposal() {
     this.personalDevelopmentService
-      .getPersonalDevelopment(this.userCode)
-      .subscribe(personalDevelopment => this.personalDevelopment = personalDevelopment);
+      .getDevelopmentProposal(this.userCode)
+      .subscribe(developmentProposals => this.developmentProposals = developmentProposals);
   }
 
 }

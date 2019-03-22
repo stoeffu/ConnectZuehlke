@@ -24,17 +24,25 @@ describe('Main App Page', () => {
     expect(appPage.sidebar().isDisplayed()).toBeTruthy();
   });
 
-  it('should go to project collegues', () => {
+  it('should go to project colleagues when clicking on navigation item', () => {
     appPage.navigateTo();
     appPage.toolbar().toggleSidebar();
-    expect(appPage.sidebar().isDisplayed()).toBeTruthy();
 
     appPage.sidebar().clickOn('My Project Colleagues');
-    const projectColleguesPage = appPage.projectColleguesList();
+    const projectColleaguesPage = appPage.projectColleagues();
 
-//    expect(projectColleguesPage.isDisplayed()).toBeTruthy();
+    expect(projectColleaguesPage.isDisplayed()).toBeTruthy();
   });
 
+  it('should go to team colleagues when clicking on navigation item', () => {
+    appPage.navigateTo();
+    appPage.toolbar().toggleSidebar();
+
+    appPage.sidebar().clickOn('My Team Colleagues');
+    const teamColleaguesPage = appPage.teamColleagues();
+
+    expect(teamColleaguesPage.isDisplayed()).toBeTruthy();
+  });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
