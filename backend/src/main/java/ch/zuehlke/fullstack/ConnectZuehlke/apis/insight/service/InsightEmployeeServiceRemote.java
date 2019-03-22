@@ -3,10 +3,14 @@ package ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.service;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.GroupDto;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.EmployeeMapper;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.ProjectMapper;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.mapper.SkillMapper;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.Employee;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.Interest;
 import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.ProjectParticipation;
+import ch.zuehlke.fullstack.ConnectZuehlke.apis.insight.dto.model.SkillDevelopmentGoal;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Group;
 import ch.zuehlke.fullstack.ConnectZuehlke.domain.Project;
+import ch.zuehlke.fullstack.ConnectZuehlke.domain.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,10 +18,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.toList;
@@ -90,6 +91,37 @@ public class InsightEmployeeServiceRemote implements InsightEmployeeService {
 
         return response.getBody().stream()
                 .map(GroupDto::toGroup)
+                .collect(toList());
+    }
+
+    @Override
+    public List<Skill> getInterestsForEmployee(String code) {
+        ResponseEntity<List<Interest>> response = this.insightRestTemplate
+                .exchange(format("/employees/{0}/interests", code), GET, null, new ParameterizedTypeReference<List<Interest>>() {
+                });
+
+        Objects.requireNonNull(response.getBody());
+
+        return response.getBody().stream()
+                .filter(Interest::isIsLike)
+                .map(Interest::getSkill)
+                .filter(Objects::nonNull)
+                .map(SkillMapper::toSkill)
+                .collect(toList());
+    }
+
+    @Override
+    public List<Skill> getSkillGoalsForEmployee(String code) {
+        ResponseEntity<List<SkillDevelopmentGoal>> response = this.insightRestTemplate
+                .exchange(format("/employees/{0}/skillgoals", code), GET, null, new ParameterizedTypeReference<List<SkillDevelopmentGoal>>() {
+                });
+
+        Objects.requireNonNull(response.getBody());
+
+        return response.getBody().stream()
+                .map(SkillDevelopmentGoal::getSkill)
+                .filter(Objects::nonNull)
+                .map(SkillMapper::toSkill)
                 .collect(toList());
     }
 }

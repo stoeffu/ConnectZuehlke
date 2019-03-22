@@ -4,11 +4,13 @@ import {PersonalDevelopmentService} from './personal-development.service';
 import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {MatListModule} from '@angular/material';
+import {DevelopmentProposalComponent} from './development-proposal/development-proposal.component';
 
 
 @NgModule({
   declarations: [
-    PersonalDevelopmentComponent
+    PersonalDevelopmentComponent,
+    DevelopmentProposalComponent
   ],
   imports: [
     CommonModule,

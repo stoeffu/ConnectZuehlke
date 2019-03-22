@@ -5,7 +5,8 @@ import {PersistencyService} from '../shared/persistency.service';
 import {PersonalDevelopmentService} from './personal-development.service';
 import {MatListModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClient} from '@angular/common/http';
+import {DevelopmentProposalComponent} from './development-proposal/development-proposal.component';
+import {SharedModule} from '../shared/shared.module';
 
 describe('PersonalDevelopmentComponent', () => {
   let component: PersonalDevelopmentComponent;
@@ -15,17 +16,21 @@ describe('PersonalDevelopmentComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         NoopAnimationsModule,
-        MatListModule
+        MatListModule,
+        SharedModule
       ],
       declarations: [
-        PersonalDevelopmentComponent
+        PersonalDevelopmentComponent,
+        DevelopmentProposalComponent
       ],
       providers: [
         PersistencyService,
-        PersonalDevelopmentService,
         {
-          provide: HttpClient,
-          useValue: {}
+          provide: PersonalDevelopmentService,
+          useValue: {
+//            getDevelopmentProposal: (fn: (code: string) => Observable<DevelopmentProposal[]>)
+//              => fn(of([]));
+          }
         }
       ]
     })
@@ -35,10 +40,19 @@ describe('PersonalDevelopmentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonalDevelopmentComponent);
     component = fixture.componentInstance;
+    component.developmentProposals = [
+      {
+        name: 'Angular',
+        source: 'Interests',
+        experts: [],
+        interestedColleagues: []
+      }
+    ]
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+
+  xit('should create', () => {
     expect(component).toBeTruthy();
   });
 });

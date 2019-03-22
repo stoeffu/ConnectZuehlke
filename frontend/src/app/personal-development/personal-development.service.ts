@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {PersonalDevelopment} from '../domain/PersonalDevelopment';
+import {DevelopmentProposal} from '../domain/DevelopmentProposal';
 import {catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -12,10 +12,10 @@ export class PersonalDevelopmentService {
   constructor(private http: HttpClient) {
   }
 
-  public getPersonalDevelopment(code: string): Observable<PersonalDevelopment> {
+  public getDevelopmentProposal(code: string): Observable<DevelopmentProposal[]> {
     return this.http
-      .get<PersonalDevelopment>('/api/$(code)/personalDevelopment')
-      .pipe(catchError(this.handleError('getPersonalDevelopment', undefined)));
+      .get<DevelopmentProposal>('/api/personalDevelopment/$(code)')
+      .pipe(catchError(this.handleError('getDevelopmentProposal', undefined)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

@@ -1,0 +1,21 @@
+<h3>With whom to get in touch for {{developmentProposal.name}}</h3>
+
+<mat-list *ngIf="developmentProposal.experts">
+
+  <h4>Experts for {{developmentProposal.name}}</h4>
+
+  <app-employee *ngFor="let employee of developmentProposal.experts"
+                [employee]="employee"></app-employee>
+
+</mat-list>
+
+<mat-list *ngIf="developmentProposal.interestedColleagues">
+
+  <h4>Interested as well in {{developmentProposal.name}}</h4>
+
+  <app-employee *ngFor="let employee of developmentProposal.interestedColleagues"
+                [employee]="employee"></app-employee>
+
+</mat-list>
+
+<p class="end-of-development-proposal">(Recommended from your {{developmentProposal.source}})</p>

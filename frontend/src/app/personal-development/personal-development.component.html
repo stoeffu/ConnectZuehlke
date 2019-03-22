@@ -1,15 +1,19 @@
 <div class="content">
 
-  <h2>My Personal Development</h2>
+  <h2>My Development Proposals</h2>
 
   <p>Hello {{userName}}!</p>
 
-  <p *ngIf="!personalDevelopment">
+  <p *ngIf="!developmentProposals">
     Loading ...
   </p>
 
-  <mat-list *ngIf="personalDevelopment">
+  <mat-list *ngIf="developmentProposals">
+
+    <app-development-proposal *ngFor="let developmentProposal of developmentProposals"
+                              [developmentProposal]="developmentProposal"></app-development-proposal>
 
   </mat-list>
 
+  <p>Do you want to see more proposals? Please fill out your Skill development plan and interests in insight.</p>
 </div>
