@@ -2,7 +2,7 @@ import {by, element, ElementFinder} from 'protractor';
 
 
 export class TeamColleaguesPo {
-  private rootSelector = by.css('[data-id="team-colleagues-list"]');
+  private rootSelector = by.css('#test');
   private root: ElementFinder;
 
   constructor() {

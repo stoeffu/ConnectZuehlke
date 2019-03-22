@@ -4,5 +4,5 @@
   Du hast keine Kollegen!
 </p>
 
-<app-employee *ngFor="let employee of project.colleagues"
-              [employee]="employee"></app-employee>
+<app-employee-accordion *ngIf="project.colleagues.length > 0"
+                        [employees]="project.colleagues"></app-employee-accordion>
