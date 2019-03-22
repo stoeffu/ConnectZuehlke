@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.Collectors.toList;
@@ -20,7 +21,8 @@ import static org.springframework.http.HttpMethod.GET;
 @Profile({"prod", "staging"})
 public class InsightOrganisationUnitServiceRemote implements InsightOrganisationUnitService {
 
-    public static final String MEMBER = "Member";
+    private static final String MEMBER = "Member";
+    private static final String LEAD = "Lead";
     private final RestTemplate insightRestTemplate;
 
     @Autowired
@@ -35,9 +37,15 @@ public class InsightOrganisationUnitServiceRemote implements InsightOrganisation
                 });
 
         return response.getBody().stream()
-                .filter(participant -> participant.getRoleText().equals(MEMBER))
+                .filter(isMemberOrLead())
                 .map(ParticipantDto::getEmployee)
                 .map(EmployeeMapper::toEmployee)
                 .collect(toList());
+    }
+
+    private Predicate<ParticipantDto> isMemberOrLead() {
+        return participant ->
+                MEMBER.equals(participant.getRoleText())
+                        || LEAD.equals(participant.getRoleText());
     }
 }
