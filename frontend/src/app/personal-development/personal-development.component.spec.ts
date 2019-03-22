@@ -7,6 +7,15 @@ import {MatListModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {DevelopmentProposalComponent} from './development-proposal/development-proposal.component';
 import {SharedModule} from '../shared/shared.module';
+import {Observable, of} from 'rxjs';
+import {DevelopmentProposal} from '../domain/DevelopmentProposal';
+import {HttpClientModule} from '@angular/common/http';
+
+class MockPersonalDevelopmentService extends PersonalDevelopmentService {
+  public getDevelopmentProposal(code: string): Observable<DevelopmentProposal[]> {
+    return of([]);
+  }
+}
 
 describe('PersonalDevelopmentComponent', () => {
   let component: PersonalDevelopmentComponent;
@@ -17,6 +26,7 @@ describe('PersonalDevelopmentComponent', () => {
       imports: [
         NoopAnimationsModule,
         MatListModule,
+        HttpClientModule,
         SharedModule
       ],
       declarations: [
@@ -27,10 +37,7 @@ describe('PersonalDevelopmentComponent', () => {
         PersistencyService,
         {
           provide: PersonalDevelopmentService,
-          useValue: {
-//            getDevelopmentProposal: (fn: (code: string) => Observable<DevelopmentProposal[]>)
-//              => fn(of([]));
-          }
+          useClass: MockPersonalDevelopmentService
         }
       ]
     })
@@ -47,12 +54,12 @@ describe('PersonalDevelopmentComponent', () => {
         experts: [],
         interestedColleagues: []
       }
-    ]
+    ];
     fixture.detectChanges();
   });
 
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

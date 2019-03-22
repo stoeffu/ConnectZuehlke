@@ -27,15 +27,15 @@ public class PersonalDevelopmentUseCase {
         String ownLocation = employeeService.getEmployee(employeeCode).getLocation();
 
         List<Skill> interests = employeeService.getInterestsForEmployee(employeeCode);
-        addDevelopmentProposal(proposals, interests, ownLocation);
+        addDevelopmentProposal(proposals, interests, ownLocation, employeeCode);
 
         List<Skill> skillGoals = employeeService.getSkillGoalsForEmployee(employeeCode);
-        addDevelopmentProposal(proposals, skillGoals, ownLocation);
+        addDevelopmentProposal(proposals, skillGoals, ownLocation, employeeCode);
 
         return proposals;
     }
 
-    private void addDevelopmentProposal(List<DevelopmentProposal> proposals, List<Skill> skills, String ownLocation) {
+    private void addDevelopmentProposal(List<DevelopmentProposal> proposals, List<Skill> skills, String ownLocation, String ownEmployeeCode) {
         for (Skill skill : skills) {
             List<SkilledEmployee> employees = assetService.getEmployeesForSkill(skill, ownLocation);
 
@@ -43,11 +43,13 @@ public class PersonalDevelopmentUseCase {
                     .filter(skilledEmployee -> skilledEmployee.getSkillLevel().equals(SkillLevel.EXPERT))
                     .limit(20)
                     .map(SkilledEmployee::getEmployee)
+                    .filter(employee -> !ownEmployeeCode.equals(employee.getCode()))
                     .collect(toList());
             List<Employee> interested = employees.stream()
                     .filter(skilledEmployee -> skilledEmployee.getSkillLevel().equals(SkillLevel.INTERESTED))
                     .limit(20)
                     .map(SkilledEmployee::getEmployee)
+                    .filter(employee -> !ownEmployeeCode.equals(employee.getCode()))
                     .collect(toList());
 
             proposals.add(new DevelopmentProposal("Interests", experts, interested, skill));

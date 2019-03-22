@@ -7,6 +7,8 @@ import {NavigationComponent} from './navigation.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {TopbarComponent} from './topbar/topbar.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
+import {PersistencyService} from '../shared/persistency.service';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -28,7 +30,9 @@ describe('NavigationComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         RouterTestingModule,
-      ]
+        LazyLoadImageModule
+      ],
+      providers: [PersistencyService]
     }).compileComponents();
   }));
 
