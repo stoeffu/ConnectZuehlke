@@ -17,17 +17,15 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(value = "/{code}")
-    public Employee getEmployee(@PathVariable String code) {
-        return employeeService.getEmployee(code);
+    @GetMapping(value = "/{employeeCode}")
+    public Employee getEmployee(@PathVariable String employeeCode) {
+        return employeeService.getEmployee(employeeCode);
     }
 
-    @GetMapping(value = "/{code}/picture",
-            produces = MediaType.IMAGE_JPEG_VALUE
-    )
+    @GetMapping(value = "/{employeeCode}/picture", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody
-    byte[] getEmployeePicture(@PathVariable(value = "code") String code) throws IOException {
-        return employeeService.getEmployeePicture(code);
+    byte[] getEmployeePicture(@PathVariable String employeeCode) throws IOException {
+        return employeeService.getEmployeePicture(employeeCode);
     }
 
 }
