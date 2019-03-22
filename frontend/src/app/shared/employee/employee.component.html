@@ -1,14 +1,14 @@
 <mat-expansion-panel>
-  <mat-expansion-panel-header [collapsedHeight]="'70px'" [expandedHeight]="'70px'">
+  <mat-expansion-panel-header [collapsedHeight]="'74px'" [expandedHeight]="'74px'">
     <img matListAvatar [width]="70" [height]="70"
-         defaultImage="../../../assets/demo.jpg" lazyLoad="/api/{{employee.code}}/picture"
+         defaultImage="../../../assets/demo.jpg" lazyLoad="/api/employee/{{employee.code}}/picture"
          alt="{{employee.firstName}} {{employee.lastName}}">
-    {{employee.firstName}} {{employee.lastName}}
+    <p class="employee-name">{{employee.firstName}} {{employee.lastName}}</p>
   </mat-expansion-panel-header>
 
-  <p>
-    E-Mail: <a href="mailto:{{employee.mail}}">{{employee.mail}}</a><br/>
-    Mobile Phone: <a href="tel:{{employee.mobilePhoneNumber}}">{{employee.mobilePhoneNumber}}</a><br/>
-    Business Phone: <a href="tel:{{employee.businessPhoneNumber}}">{{employee.businessPhoneNumber}}</a><br/>
-  </p>
+  <ul>
+    <li>E-Mail: <a href="mailto:{{employee.mail}}">{{employee.mail}}</a></li>
+    <li>Mobile: <a href="tel:{{employee.mobilePhoneNumber}}">{{employee.mobilePhoneNumber}}</a></li>
+    <li>Business: <a href="tel:{{employee.businessPhoneNumber}}">{{employee.businessPhoneNumber}}</a></li>
+  </ul>
 </mat-expansion-panel>

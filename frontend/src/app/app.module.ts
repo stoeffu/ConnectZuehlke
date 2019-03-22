@@ -10,8 +10,6 @@ import {intersectionObserverPreset, LazyLoadImageModule} from 'ng-lazyload-image
 
 
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {EmployeeListComponent} from './employee-list/employee-list.component';
-import {EmployeeComponent} from './employee-list/employee/employee.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SearchPipe} from './search.pipe';
@@ -32,15 +30,13 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {HackathonHeadlineComponent} from './hackathon-headline/hackathon-headline.component';
 import {SidebarComponent} from './navigation/sidebar/sidebar.component';
 import {TopbarComponent} from './navigation/topbar/topbar.component';
-import {EmployeeDetailComponent} from './employee-detail/employee-detail.component';
-import {MapComponent} from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
-import {CustomerListComponent} from './customer-list/customer-list.component';
-import {CustomerComponent} from './customer-list/customer/customer.component';
 import {LoginComponent} from './login/login.component';
 import {ErrorRequestInterceptor} from './common/error-request-interceptor';
 import {ProjectColleaguesModule} from './project-colleagues/project-colleagues.module';
-import { LogoutComponent } from './logout/logout.component';
+import {LogoutComponent} from './logout/logout.component';
+import {PersonalDevelopmentModule} from './personal-development/personal-development.module';
+import {TeamColleaguesModule} from './team-colleagues/team-colleagues.module';
 
 
 // For more icons, please checkout https://fontawesome.com/icons?d=gallery
@@ -52,18 +48,12 @@ library.add(faAngular);
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
-    EmployeeListComponent,
     PageNotFoundComponent,
     SearchPipe,
     NavigationComponent,
     HackathonHeadlineComponent,
     SidebarComponent,
     TopbarComponent,
-    EmployeeDetailComponent,
-    MapComponent,
-    CustomerListComponent,
-    CustomerComponent,
     LoginComponent,
     LogoutComponent
   ],
@@ -87,7 +77,9 @@ library.add(faAngular);
     MatSidenavModule,
     MatListModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBrgp24CvFV3M0PZGByVDVEG0qn56k8Y-g'}),
-    ProjectColleaguesModule
+    ProjectColleaguesModule,
+    TeamColleaguesModule,
+    PersonalDevelopmentModule
   ],
   providers: [
     {

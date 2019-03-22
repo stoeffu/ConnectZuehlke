@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {ProjectColleagues} from '../domain/ProjectColleagues';
 import {catchError} from 'rxjs/operators';
+import {TeamColleagues} from '../domain/TeamColleagues';
 
 @Injectable()
-export class ProjectColleaguesService {
+export class TeamColleaguesService {
 
   constructor(private http: HttpClient) {
   }
 
-  public getProjectColleagues(code: string): Observable<ProjectColleagues> {
+  public getTeamColleagues(employeeCode: string): Observable<TeamColleagues> {
     return this.http
-      .get<ProjectColleagues>(`/api/colleagues/${code}/projects`)
-      .pipe(catchError(this.handleError('getProjectColleagues', undefined)));
+      .get<TeamColleagues>(`/api/colleagues/${employeeCode}/team`)
+      .pipe(catchError(this.handleError('getTeamColleagues', undefined)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

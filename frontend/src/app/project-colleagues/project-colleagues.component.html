@@ -1,10 +1,18 @@
-<h2>A list of all my project colleagues</h2>
+<div class="content">
 
-<p>Hallo {{userCode}} !</p>
+  <h2>My Project Colleagues</h2>
 
-<mat-list>
+  <p>Hello {{userName}}!</p>
 
-  <app-projects *ngFor="let project of projectColleagues.projects"
-                [project]="project"></app-projects>
+  <p *ngIf="!projectColleagues">
+    Loading ...
+  </p>
 
-</mat-list>
+  <mat-list *ngIf="projectColleagues" data-id="projectCollegues-list">
+
+    <app-projects *ngFor="let project of projectColleagues.projects"
+                  [project]="project"></app-projects>
+
+  </mat-list>
+
+</div>
