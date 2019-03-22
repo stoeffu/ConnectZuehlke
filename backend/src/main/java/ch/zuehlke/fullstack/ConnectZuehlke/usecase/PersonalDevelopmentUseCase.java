@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,17 +37,17 @@ public class PersonalDevelopmentUseCase {
 
     private void addDevelopmentProposal(List<DevelopmentProposal> proposals, List<Skill> skills, String ownLocation) {
         for (Skill skill : skills) {
-            List<SkilledEmployee> employees = assetService.getEmployeesForSkill(skill);
+            List<SkilledEmployee> employees = assetService.getEmployeesForSkill(skill, ownLocation);
 
             List<Employee> experts = employees.stream()
                     .filter(skilledEmployee -> skilledEmployee.getSkillLevel().equals(SkillLevel.EXPERT))
+                    .limit(20)
                     .map(SkilledEmployee::getEmployee)
-                    .filter(employee -> Objects.equals(employee.getLocation(), ownLocation))
                     .collect(toList());
             List<Employee> interested = employees.stream()
                     .filter(skilledEmployee -> skilledEmployee.getSkillLevel().equals(SkillLevel.INTERESTED))
+                    .limit(20)
                     .map(SkilledEmployee::getEmployee)
-                    .filter(employee -> Objects.equals(employee.getLocation(), ownLocation))
                     .collect(toList());
 
             proposals.add(new DevelopmentProposal("Interests", experts, interested, skill));

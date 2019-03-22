@@ -6,5 +6,5 @@ import ch.zuehlke.fullstack.ConnectZuehlke.domain.SkilledEmployee;
 import java.util.List;
 
 public interface InsightAssetService {
-    List<SkilledEmployee> getEmployeesForSkill(Skill skill);
+    List<SkilledEmployee> getEmployeesForSkill(Skill skill, String location);
 }

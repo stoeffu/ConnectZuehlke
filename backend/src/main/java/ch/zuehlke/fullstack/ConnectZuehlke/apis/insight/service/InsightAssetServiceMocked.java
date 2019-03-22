@@ -12,7 +12,7 @@ import java.util.List;
 @Profile({"ci", "default"})
 public class InsightAssetServiceMocked implements InsightAssetService {
     @Override
-    public List<SkilledEmployee> getEmployeesForSkill(Skill skill) {
+    public List<SkilledEmployee> getEmployeesForSkill(Skill skill, String location) {
         return Collections.emptyList();
     }
 }

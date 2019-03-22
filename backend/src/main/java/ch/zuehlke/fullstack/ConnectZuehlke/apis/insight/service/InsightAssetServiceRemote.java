@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.text.MessageFormat.format;
 import static org.springframework.http.HttpMethod.GET;
@@ -29,7 +30,7 @@ public class InsightAssetServiceRemote implements InsightAssetService {
     }
 
     @Override
-    public List<SkilledEmployee> getEmployeesForSkill(Skill skill) {
+    public List<SkilledEmployee> getEmployeesForSkill(Skill skill, String location) {
         List<SkilledEmployee> skilledEmployees = new ArrayList<>();
 
         ResponseEntity<List<AssetEmployeeLink>> response = this.insightRestTemplate
@@ -40,14 +41,16 @@ public class InsightAssetServiceRemote implements InsightAssetService {
             boolean isExpert = employeeLink.getExperience().getValue() >= 4;
             boolean isBeginner = employeeLink.getExperience().getValue() == 1;
 
-            if (isExpert || isBeginner) {
+            String othersLocation = employeeLink.getLocation();
+
+            if (Objects.equals(othersLocation, location) && (isExpert || isBeginner)) {
                 SkillLevel skillLevel = isExpert ? SkillLevel.EXPERT : SkillLevel.INTERESTED;
 
                 String firstName = employeeLink.getFirstName();
                 String lastName = employeeLink.getLastName();
                 Employee employee = new Employee(firstName, lastName, format("{0}.{1}@zuehlke.com", firstName, lastName),
                         null, null, employeeLink.getId().intValue(), employeeLink.getCode(),
-                        employeeLink.getLocation());
+                        othersLocation);
 
                 skilledEmployees.add(new SkilledEmployee(skill, employee, skillLevel));
             }
