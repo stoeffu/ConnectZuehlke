@@ -36,7 +36,7 @@ public class Interest {
 
     @JsonProperty("IsLike")
 
-    private Boolean isLike = null;
+    private Boolean isLike = false;
 
     @JsonProperty("Employee")
 

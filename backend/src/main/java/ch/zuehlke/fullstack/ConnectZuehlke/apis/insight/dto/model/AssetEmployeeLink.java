@@ -28,6 +28,20 @@ import java.util.Objects;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2019-03-21T13:18:19.970506+01:00[Europe/Zurich]")
 public class AssetEmployeeLink {
 
+    @JsonProperty("FirstName")
+    private String firstName = null;
+
+    @JsonProperty("LastName")
+    private String lastName = null;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     @JsonProperty("AssetId")
 
     private Long assetId = null;
