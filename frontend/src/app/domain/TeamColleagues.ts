@@ -1,7 +1,7 @@
-import {Colleague} from './Colleague';
+import {Employee} from './Employee';
 
 export interface TeamColleagues {
 
-  colleagues: Colleague[];
+  colleagues: Employee[];
 
 }

@@ -1,4 +1,4 @@
-export interface Colleague {
+export interface Employee {
 
   code: string;
   firstName: string;
